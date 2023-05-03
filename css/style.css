@@ -1,0 +1,770 @@
+@charset "UTF-8";
+
+@import url(reset.css); /* ❗ reset 파일 style.css에 연결 */
+/* font-family: 'Nanum Brush Script', cursive;
+font-family: 'Nanum Gothic', sans-serif; */
+
+
+/* 레이아웃 */
+#wrap {}
+#header {background: url(../img/bg-swan.jpg) center top; height: 325px;}
+#contents {}
+#footer {border-top: 1px solid #eee;}
+
+
+/* contents 레이아웃 */
+.cont_nav {background-color: #edf9fd;}
+#cont_tit {background-color: #eaf7fd;}
+#cont_ban {background-color: #dceff7;}
+#cont_cont {background-color: #f6fdff;}
+
+/* 컨테이너 */
+.container {
+    width: 990px;
+    margin: 0 auto;
+}
+
+
+/* 💛헤더 */
+.header .header-menu {
+/*  width: 300px;    1) 오른쪽정렬 방법 (margin사용)
+    margin-left: auto;  사용하지 않는 공간을 활용 -> auto */
+    text-align: right; /* 2) 오른쪽정렬 방법 */
+}
+.header .header-menu a {
+    color: #fff;
+    padding: 10px 0 10px 13px; /* 높이값 패딩적용안되는데, a는 인라인요소이기 때문 */
+    display: inline-block; /* 인라인요소이지만 블럭요소를 가진 inline-block으로 적용 */
+}
+.header .header-menu a:hover {
+    color: #999;
+}
+.header .header-title {
+    text-align: center; /* 내 밑 인라인요소를 가운데 정렬하라(부모에게 주기) */
+}
+.header .header-title h1{
+    background-color: rgb(37, 138, 206);
+    color: #fff;
+    font-size: 28px;
+    text-transform: uppercase; /* 글자 대문자로 변경 */
+    margin-top: 40px;
+    display: inline-block; /* 인라인속성이 있기때문에 부모의 text-align,p값 먹힘 */
+    padding: 5px 20px 6px;
+}
+.header .header-title a {
+    color: #fff;
+    font-size: 18px;
+    display: inline-block;
+    padding: 5px 20px 6px;
+    background-color: rgb(25, 119, 182);
+    margin-top: -5px; /* 위쪽이랑 겹치게하기위해 -값 작성(패딩은 -불가) */
+}
+.header .header-icon {
+    text-align: center;
+    margin-top: 30px;
+}
+.header .header-icon a {
+    display: inline-block; /* 인라인요소 넓이값 지정을 위해서 inline-block */
+    width: 60px; height: 60px;
+    background: url(../img/icon.png); /* 아이콘들 이미지 한장으로 디자이너가 작업해놓음 */
+    margin: 0 3px;
+}
+/* 🔸중요) 이미지 스프라이트(아이콘넣기) 기법  */
+.header .header-icon a.icon1 {
+    background-position: 0 0; /* 🔸중요) background-position:사진움직이는 태그 */
+}
+.header .header-icon a.icon2 {
+    background-position: 0 -60px;
+}
+.header .header-icon a.icon3 {
+    background-position: 0 -120px;
+}
+.header .header-icon a.icon4 {
+    background-position: 0 -180px;
+}
+.header .header-icon a.icon1:hover {
+    background-position: -60px 0; /* 🔸중요) hover시 이미지변경 */
+}
+.header .header-icon a.icon2:hover {
+    background-position: -60px -60px;
+}
+.header .header-icon a.icon3:hover {
+    background-position: -60px -120px;
+}
+.header .header-icon a.icon4:hover {
+    background-position: -60px -180px;
+}
+
+
+/* 💛.nav */
+.nav {
+    padding: 30px 0;
+    display: none;
+}
+.nav>div {
+    float: left;
+    width: 40%;
+}
+.nav>div.last {
+    width: 20%;
+}
+.nav>div h3 {
+    font-size:  18px;
+    color: #25a2d0;
+    margin-bottom: 4px;
+}
+.nav>div ol {overflow: hidden;} /* 모든 ol한테 clearfix주는거보다 오버플로우로 한번에 처리 */
+.nav>div ol li {
+    float: left;
+    width: 50%; /* 2단으로 만들때 50% */
+    position: relative;
+    margin-bottom: 3px;
+}
+.nav>div ol li:after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: 0;
+    width: 0; height: 2px; /* 1)hover했을 때 밑줄 나타내기 */
+    background-color: #25a2d0;
+    transition: 0.2s;
+}
+.nav>div ol li:hover:after {
+    width: 75%; /* 2)hover했을 때 나타나는 밑줄 넓이 */
+}
+.nav>div.last ol li {
+    width: 100%; /* 마지막div는 1단 */
+}
+/* .nav>div ol li a:hover {
+    text-decoration: underline; 밑줄
+} */
+
+
+.tit {position: relative;}
+.tit h2 {
+    font-family: 'Nanum Brush Script', cursive;
+    font-size: 40px;
+    color: #2c94c4;
+    text-align: center;
+    padding: 20px 0;
+    letter-spacing: 2px; /* ✔ 자간조절 */
+}
+.tit .btn {
+    position: absolute;
+    right: 0; top: 10px;
+    width: 60px; height: 60px;
+    background:url(../img/icon.png) 0 -600px; /* url 뒤에값 background-position */
+}
+.tit .btn.on { 
+    /* ⭕ js에서 toggle로 클래스명 .on만든걸로 적용 (index에는 클래스명on 없음) */
+    background-position: 0 -660px;
+}
+
+
+/* 💛banner (.cont_ban) */
+.ban {padding: 24px 0 40px;}
+.ban img {border: 4px solid #dcdcdc;}
+.ban img:hover {border: 4px solid #98dcdc;}
+/* ➰ ↓개발자모드에서 슬릭 클래스명 확인하여 태그값 작성하기 */
+.ban .slick-prev {
+    position: absolute; /* 필수 */
+    left: -80px; top: 70px;
+    width: 43px; height: 43px; /* 포토샵에서 아이콘사이즈 재서 작성 */
+    background: url(../img/icon.png) -150px 0;
+    text-indent: -9999px; /* 기존 slick복붙한 'Previous' 글자없애기 */
+}
+.ban .slick-prev:hover {
+    background: url(../img/icon.png) -193px 0;
+}
+.ban .slick-next {
+    position: absolute;
+    right: -80px; top: 70px;
+    width: 43px; height: 43px;
+    background: url(../img/icon.png) -150px -43px;
+    text-indent: -9999px;
+}
+.ban .slick-next:hover {
+    background: url(../img/icon.png) -193px -43px;
+}
+
+.ban .slick-list {
+    left: 25px; /* 슬릭 값 설정해서 가운데정렬 */
+    margin-top: 10px;
+}
+.ban .slick-dots {
+    text-align: center;
+}
+.ban .slick-dots li {
+    display: inline-block;
+    margin: 5px;
+}
+.ban .slick-dots li button {
+    font-size: 0;  /* 123456789 숫자 안보이게 하기 */
+    width: 15px; height: 15px;
+    background-color: #5dbfeb;
+    border-radius: 20px; /* 사각형 원으로 만들기 50% */
+    cursor:pointer; /* ✔ 마우스 손가락표시 */
+    transform: scaleX(1);
+    transition: 0.3s;
+}
+.ban .slick-dots li.slick-active button {
+    background-color: #2b91c8;
+    transform: scaleX(1.3);
+    transform-origin: left top; /* ✔변형시작점 : 왼쪽에서 오른쪽으로 커지기 */
+    border-radius: 5px;
+}
+
+
+/* 💛 cont_cont */
+.cont {
+    padding-top: 30px;
+}
+.cont .column {
+    border-right: 1px solid #c8c8c8 ;
+    width: 289px; height: 363px;
+    float: left; /* float는 본인에게 적용 */
+    padding-right: 30px;
+    margin: 0 30px 30px 0;
+    position: relative; /* 2)ico_img의 position기준점->작성하면 넓이값작성한 만큼 화면에 나타남 */
+}
+.cont .col1 {}
+.cont .col2 {}
+.cont .col3 {
+    border-right: 0;
+    margin-right: 0; padding-right: 0;
+}
+.cont .col4 {}
+.cont .col5 {}
+.cont .col6 {
+    border-right: 0;
+    margin-right: 0; padding-right: 0;
+}
+
+.cont .column h3 {}
+.cont .column h3 .ico_img {
+    background: url(../img/icon.png);
+    width: 60px; height: 60px;
+    left: 0; top: 0; /* 1)reset.css에서 ir태그 absolute상태지만 위치값은 없었으므로 여기서 설정 */
+    /* transition: 1s; 
+    -> hover하면 옆에이미지가 위치이동하면서 보이게 되는데, 시간을 안주고 한번에 변하도록 설정*/
+}
+.cont .col1 h3 .ico_img {
+    background-position: 0 -240px;
+}
+.cont .col2 h3 .ico_img {
+    background-position: 0 -300px;
+}
+.cont .col3 h3 .ico_img {
+    background-position: 0 -360px;
+}
+.cont .col4 h3 .ico_img {
+    background-position: 0 -420px;
+}
+.cont .col5 h3 .ico_img {
+    background-position: 0 -480px;
+}
+.cont .col6 h3 .ico_img {
+    background-position: 0 -540px;
+}
+
+.cont .col1 h3 .ico_img:hover {
+    background-position: -60px -240px;
+}
+.cont .col2 h3 .ico_img:hover {
+    background-position: -60px -300px;
+}
+.cont .col3 h3 .ico_img:hover {
+    background-position: -60px -360px;
+}
+.cont .col4 h3 .ico_img:hover {
+    background-position: -60px -420px;
+}
+.cont .col5 h3 .ico_img:hover {
+    background-position: -60px -480px;
+}
+.cont .col6 h3 .ico_img:hover {
+    background-position: -60px -540px;
+}
+
+.cont .column h3 .ico_tit {
+    font-size: 16px;
+    color: #2c94c4;
+    padding-left: 70px;
+}
+.cont .column .ico_desc {
+    border-bottom: 1px solid #c8c8c8;
+    padding-bottom: 15px;
+    padding-left: 70px;
+    margin-bottom: 15px;
+}
+
+/* 게시판 notice .col1*/
+.notice {
+    /* margin-top: 15px; */
+    position: relative; /* a.more의 position기준 */
+} 
+.notice h4 {
+    font-size: 14px;
+    color: #0093bd;
+    font-weight: bold;
+    padding-bottom: 3px;
+}
+.notice ul {}
+.notice ul li {
+    /* ❗말줄임말 3종set */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /* ➰ white-space : nowrap, normal, pre;
+           nowrap - 화면의 넓이와 상관없이 한 줄로 쭉 이어짐
+           normal - 화면의 넓이에 따라 글자가 아래로 떨어짐
+           pre - 화면의 넓이와 상관없이 내가 작성한 엔터 그대로 나옴 */
+
+    background: url(../img/dot.gif) no-repeat 0 8px;
+    padding-left: 8px;
+     /* 자식은 부모의 패딩에 관여못하므로 부모인 li에 패딩값 설정 
+         (+) 글자도 a태그,li태그의 자식인셈)   */
+}
+.notice ul li a {
+    font-size: 12px;
+}
+.notice a.more {
+    width: 17px; height: 17px;
+    /* ❗ a태그 넓이 인식되는 이유는 ir태그에서 absolute해서 원래 성질 상실함 */
+    background: url(../img/icon.png) -150px -90px;
+    right: 0; top: 0;
+}
+
+/* 게시판2 notice2 .col1 */
+.notice2 {
+    margin-top: 15px;
+    position: relative;
+}
+.notice2 h4 {
+    font-size: 14px;
+    color: #0093bd;
+    font-weight: bold;
+    padding-bottom: 3px;
+}
+.notice2 ul {}
+.notice2 ul li {
+    overflow: hidden; /* 자식들한테 float 줬으니 깨지지 말라고 작성 */
+    background: url(../img/dot.gif) no-repeat 0 8px;
+    /* top: 0; right: 0; -> 여기는 왜 앱솔 위치값 안잡는지?*/
+    padding-left: 8px;
+}
+.notice2 ul li a {
+    float: left; /* ❗ a, span 인라인태그 넓이 인식되는 이유는 float가 적용되면 본래 성질 상실 */
+    width: 65%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.notice2 ul li span {
+    float: right;
+    width: 30%;
+}
+.notice2 a.more {
+    right: 0; top: 0;
+    background: url(../img/icon.png) -150px -90px;
+    width: 17px; height: 17px;
+}
+
+/* 게시판3 notice3 */
+.notice3 {
+    margin-top: 15px;
+    position: relative;
+}
+.notice3 h4 {
+    font-size: 14px;
+    color: #0093bd;
+    font-weight: bold;
+    padding-bottom: 3px;
+}
+.notice3 ul {}
+.notice3 ul li { 
+/* ❔글자를 밀어야하는데, 왜 li를 미는지? ❗자식은 부모의 패딩에 관여를 못하니까! 부모인 li에 적용
+   ❔li를 밀면, img는 왜 안밀리는지? ❗🔹img에 absolute잡아줘서 고정되었고,
+                                     부모의 영역은 패딩값까지 포함되어 img만 안밀리게 된다! */
+    position: relative;
+    padding: 8px 0 16px 60px; /*🔹*/
+}
+.notice3 ul li a {}
+.notice3 ul li a img {
+    position: absolute; /*❗🔹*/
+    left: 0; top: 0;
+    width: 50px;
+}
+.notice3 ul li a strong {}
+.notice3 ul li a span {
+    display: block;
+    /* 말줄임은 블럭요소만 적용됨 */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.notice3 a.more {
+    top: 0; right: 0;
+    width: 17px; height: 17px;
+    background: url(../img/icon.png) -150px -90px;
+}
+
+
+/* col4. notice_hover */
+.notice_hover {}
+.notice_hover h4 {
+    font-size: 14px;
+    color: #0093bd;
+    font-weight: bold;
+    padding-bottom: 3px;
+}
+.notice_hover ul {}
+.notice_hover ul li {
+    float: left;
+    width: 93px;
+    margin-right: 5px;
+}
+.notice_hover ul li:last-child {
+    margin-right: 0;
+}
+.notice_hover ul li a  {}
+.notice_hover ul li a span {
+    /* ✔ 인라인요소는 자식의 넓이를 따라감 */
+    position: relative;
+    display: block; /* ❗ em태그의 포지션기준점 되려니까 공간인식못하는 인라인 span태그이므로, 
+                         공간을 주기위해 display:블럭;처리 */
+}
+.notice_hover ul li a span img {
+    width: 100%;
+    display: block; /* ❗ 이미지태그는 인라인요소라서 밑에 공간생기게 되는데, 없애기위해 블럭처리 */
+}
+.notice_hover ul li a span em {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    line-height: 98px;
+    background-color: rgba(0,0,0,0.7);
+    color: #fff;
+    text-align: center; /* ❗ 인라인요소에는 text-align: center;적용안되지만,
+                             position을 줘서 본인성질 잃어버리니 가능해짐 */
+    visibility: hidden;
+    /* ✔ 영역을 안보이게 하는 방법
+       display:none; 실제영역이 없어짐 (애니o)
+       opacity:0; 영역은 존재하지만 안보이기만 한 것 (애니o)
+       visibility: hidden; 영역은 존재하지만 안보이기만 한 것 (애니x)*/
+}
+.notice_hover ul li a span:hover em {
+    visibility: visible; /* em이 나타남 */
+}
+.notice_hover ul li a strong {
+    font-size: 12px;
+    padding-top: 3px;
+    display: block; /* pt값 주기위해 */
+}
+
+/* <!-- .마우스 hover효과2(.col4) .notice_hover2 --> */
+.notice_hover2 {
+    margin-top: 15px;
+}
+.notice_hover2 ul {}
+.notice_hover2 ul li {
+    float: left;
+    width: 93px;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+.notice_hover2 ul li:last-child {
+    margin-right: 0;
+}
+.notice_hover2 ul li a {}
+.notice_hover2 ul li a span {
+    position: relative;
+    display: block;
+    overflow: hidden; /* hover넣기 위해 */
+}
+.notice_hover2 ul li a span img {
+    width: 100%;
+    display: block;
+}
+.notice_hover2 ul li a span em {
+    position: absolute;
+    bottom: -25px; left: 0; /* hover시 밑에서 올라오도록 bottom값 작성 */
+    width: 100%;
+    background-color: rgba(0,0,0,0.7);
+    color: #fff;
+    text-align: center;
+    padding: 2px 0;
+    transition: 0.3s;
+}
+.notice_hover2 ul li a span:hover em {
+    bottom: 0px;
+} 
+.notice_hover2 ul li a strong {
+    font-size: 14px;
+    padding-top: 3px;
+    display: block;
+}
+
+
+/* 탭메뉴 .col5.tab_menu */
+.tab_menu {
+    height: 108px;
+    border: 1px solid #ccc;
+    padding: 8px; /* ✔전체에 p값 줘서 선이 끝까지 안채워져 보이는 것임! */
+    position: relative; /* 🔹2차메뉴 기준점 */
+}
+.tab_menu h4 {}
+.tab_menu ul {
+    border-bottom: 1px solid #ccc;
+}
+.tab_menu ul li {
+    float: left;
+    border: 1px solid #ccc;
+    margin-right: -1px; margin-bottom: -1px;
+    /* 선을 줘서 li선끼리붙어서 중간에 겹치는부분은 2px처럼 됨 -> ✔없애기위해 mr -1적용  */
+}
+.tab_menu ul li a {
+    display: block;
+    padding: 5px 10px;
+}
+/* 탭메뉴-🔹2차메뉴 */
+.tab_menu ul li ul {
+    position: absolute;
+    top: 50px; left: 10px;
+    width: 260px; /* 말줄임말 넣으려고 w값 작성 */
+    border: 0;
+}
+.tab_menu ul li ul li {
+    float: none;
+    border: 0;
+    background: url(../img/dot.gif) no-repeat 0 8px;
+    padding-left: 10px;
+}
+.tab_menu ul li ul li a {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 0 3px 0;
+}
+
+.tab_menu ul li.active {
+    background-color: #2c94c4;
+}
+.tab_menu ul li.active a {
+    color: #fff;
+}
+.tab_menu ul li.active ul li a {
+    color: #222;
+} 
+
+/* notice4 (col.5) */
+.notice4 {
+    border: 1px solid #ccc;
+    margin-top: 15px;
+    position: relative;
+}
+.notice4 h4 {
+    border-bottom: 1px solid #ccc;
+    padding: 8px 10px;
+    color: #0090bd;
+}
+.notice4 h4 em {
+    color: #cf3292;
+}
+.notice4 ul {
+    padding: 10px;
+}
+.notice4 ul li {
+    overflow: hidden; /* 자식깨지는 것 방지 */
+}
+.notice4 ul li a {
+    float: left;
+    width: 60%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.notice4 ul li span {
+    float: right;
+    width: 30%;
+}
+.notice4 .more {
+    position: absolute;
+    top: 10px; right: 10px;
+}
+
+
+/* 갤러리 .col6 */
+.gallery {
+    border: 1px solid #ccc;
+    position: relative;
+}
+.gallery h4 {
+    font-size: 14px;
+    color: #0090bd;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0 8px 11px;
+    font-weight: bold;
+}
+.gallery img {
+    width: 100%;
+}
+
+.gallery .gallery_btn {
+    position: absolute;
+    top: 7px; right: 7px;
+}
+.gallery .gallery_btn button {
+    width: 23px; height: 23px;
+    background: url(../img/icon.png) no-repeat;
+}
+.gallery .gallery_btn button.gb_icon1 {
+    background-position: -150px -120px;
+}
+.gallery .gallery_btn button.gb_icon2 {
+    background-position: -150px -143px;
+}
+.gallery .gallery_btn button.gb_icon3 {
+    background-position: -150px -166px;
+}
+.gallery .gallery_btn button.gb_icon4 {
+    background-position: -150px -189px;
+}
+
+.gallery .gallery_btn button.gb_icon1:hover {
+    background-position: -173px -120px;
+}
+.gallery .gallery_btn button.gb_icon2:hover {
+    background-position: -173px -143px;
+}
+.gallery .gallery_btn button.gb_icon3:hover {
+    background-position: -173px -166px;
+}
+.gallery .gallery_btn button.gb_icon4:hover {
+    background-position: -173px -189px;
+}
+
+
+/* 로그인 */
+.login_wrap {
+    background-color: #f2f4f5;
+    padding: 15px;
+}
+.login_header {
+    font-size: 12px;
+    padding: 3px 0;
+}
+.login_wrap .lh_check {
+    float: left;
+    padding-right: 15px;
+}
+.login_wrap .lh_check .info_check {
+    vertical-align: -3px; /* ❗ 인라인끼리 라인을 맞출때 */
+}
+.login_wrap .lh_ip {
+    float: left;
+}
+.login_wrap .lh_ip em {}
+
+.login_content {
+    position: relative;
+}
+.login_content .lc_text .input_text {
+    width: 182px; height: 16px;
+    border: 1px solid #bebebe;
+    background-color: #fff;
+    outline: none;
+    margin-bottom: 3px;
+    padding: 2px 5px;
+}
+.login_content .lc_btn {
+    position: absolute;
+    top: 0; right: 0;
+    width: 62px; height: 47px;
+    background-color: #fff;
+    border: 1px solid #bebebe;
+}
+.login_footer {margin-top: 5px;}
+.login_footer ul {}
+.login_footer ul li {
+    display: inline; /* 공간을 확실히 정하지 않아도 될 때 수평 나란히 정렬은 inline */
+}
+.login_footer ul li a {}
+.login_footer ul li a strong {}
+
+/* 팝업 */
+.popup {margin-top: 15px;}
+.popup h4 {
+    font-size: 14px;
+    color: #0093bd;
+    font-weight: bold;
+    padding-bottom: 4px;
+}
+.popup ul {}
+.popup ul li {
+    float: left;
+    width: 93px;
+    margin-right: 5px;
+}
+.popup ul li:last-child {
+    margin-right: 0;
+}
+.popup ul li a {}
+.popup ul li a img {
+    width: 100%;
+}
+.popup ul li.layer {}
+.popup ul li.window {}
+.popup ul li.lightbox {}
+
+
+
+/* 💛footer */
+.footer {
+    text-align: center;
+    padding: 25px 0;
+}
+.footer ul {
+    margin-bottom: 20px;
+}
+.footer ul li {
+    display: inline;
+    padding: 0 7px 0 10px;
+    position: relative;
+}
+.footer ul li::before{
+    content: '';
+    width: 1px; height: 12px;
+    background-color: #ccc;
+    position: absolute;
+    top: 0; left: 0;
+}
+.footer ul li:first-child::before {
+    width: 0; height: 0;
+    /* display: none; -> 이것도 가능*/
+}
+.footer ul li a {}
+.footer address {}
+
+
+
+
+/* layer popup */
+#layer {
+    display: none;
+    position: fixed;
+    left: 50px; top: 50px;
+    width: 700px;
+    border: 10px solid #dceff7;
+}
+#layer img {
+    width: 100%;
+    display: block; /* 이미지의 공간 없애기 */
+}
+#layer .close {
+    position: absolute;
+    top: 10px; right: 10px;
+    background-color: #0093bd;
+    padding: 2px 6px;
+    color: #fff;
+    border-radius: 10px;
+}
